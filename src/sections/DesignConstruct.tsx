@@ -20,7 +20,7 @@ const DesignConstruct = () => {
                         {designConstructConfig.tag}
                     </span>
                     <h2
-                        className="font-display text-4xl md:text-5xl text-steel-50 leading-tight"
+                        className="font-display text-4xl md:text-5xl text-steel-50 leading-tight text-white"
                         dangerouslySetInnerHTML={{
                             __html: designConstructConfig.heading.replace('\n', '<br/>'),
                         }}
