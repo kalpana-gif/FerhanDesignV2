@@ -88,7 +88,7 @@ const DesignConstruct = () => {
                                     strokeWidth={1.5}
                                     className="text-chrome mb-5 group-hover:scale-110 transition-transform duration-300"
                                 />
-                                <h4 className="font-display text-steel-50 text-xl mb-3">{benefit.title}</h4>
+                                <h4 className="font-display text-steel-50 text-xl mb-3 text-white   ">{benefit.title}</h4>
                                 <p className="text-steel-400 font-light text-sm leading-relaxed">{benefit.description}</p>
                             </div>
                         ))}

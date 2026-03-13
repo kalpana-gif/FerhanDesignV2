@@ -120,6 +120,7 @@ export interface Project {
   location: string;
   year: string;
   image: string;
+  gallery?: string[];
   description: string;
   services: string[];
   status: string;
@@ -146,6 +147,7 @@ export const projectsConfig: ProjectsConfig = {
       location: "Riverton, Perth WA",
       year: "2024",
       image: "/images/project-1.jpg",
+      gallery: ["/images/project-2.jpg", "/images/project-3.jpg", "/images/project-4.jpg"],
       description: "A stunning two-storey contemporary family home featuring clean geometric forms, floor-to-ceiling glazing, and seamless indoor-outdoor living. The design maximises natural light while providing optimal thermal performance for the Perth climate.",
       services: ["Concept Design", "Design Development", "Working Drawings", "Project Management"],
       status: "Completed"
@@ -157,6 +159,7 @@ export const projectsConfig: ProjectsConfig = {
       location: "Willetton, Perth WA",
       year: "2023",
       image: "/images/project-2.jpg",
+      gallery: ["/images/project-1.jpg", "/images/project-5.jpg"],
       description: "An elegant double storey residence with white rendered facade and timber accents. Features a north-facing alfresco area, pool, and generous open-plan living spaces designed for the modern Australian family lifestyle.",
       services: ["Concept Design", "Design Development", "Working Drawings"],
       status: "Completed"
@@ -168,6 +171,7 @@ export const projectsConfig: ProjectsConfig = {
       location: "Queens Park, Perth WA",
       year: "2024",
       image: "/images/project-3.jpg",
+      gallery: ["/images/project-6.jpg", "/images/project-4.jpg", "/images/project-2.jpg"],
       description: "A premium multi-residential development comprising 12 contemporary apartments over 4 levels. Each unit features private balconies, premium finishes, and shared amenities. Designed to complement the urban fabric of Queens Park.",
       services: ["Concept Design", "Design Development", "Working Drawings", "Development Application"],
       status: "Under Construction"
@@ -179,6 +183,7 @@ export const projectsConfig: ProjectsConfig = {
       location: "Beckingham, Perth WA",
       year: "2023",
       image: "/images/project-4.jpg",
+      gallery: ["/images/project-1.jpg", "/images/project-3.jpg"],
       description: "A purpose-built modern medical facility designed to create a welcoming and functional environment for patients and practitioners. The design incorporates natural light, efficient workflow layouts, and accessibility throughout.",
       services: ["Concept Design", "Design Development", "Working Drawings", "Building Application"],
       status: "Design Development Stage"
@@ -190,6 +195,7 @@ export const projectsConfig: ProjectsConfig = {
       location: "Southern River, Perth WA",
       year: "2023",
       image: "/images/project-5.jpg",
+      gallery: ["/images/project-2.jpg", "/images/project-1.jpg", "/images/project-6.jpg"],
       description: "A sophisticated single-storey home with a minimalist white facade and timber detailing. The design integrates passive solar principles with a thoughtful floor plan that connects internal spaces to the native Australian landscape.",
       services: ["Concept Design", "Design Development", "Working Drawings"],
       status: "Completed"
@@ -201,6 +207,7 @@ export const projectsConfig: ProjectsConfig = {
       location: "Perth CBD, WA",
       year: "2022",
       image: "/images/project-6.jpg",
+      gallery: ["/images/project-3.jpg", "/images/project-4.jpg"],
       description: "A vibrant restaurant and hospitality space at the iconic Yagan Square precinct in Perth CBD. The design features exposed concrete, warm timber joinery, and bespoke pendant lighting to create an inviting dining atmosphere in the heart of the city.",
       services: ["Concept Design", "Interior Architecture", "Working Drawings", "Project Management"],
       status: "Completed"
@@ -340,9 +347,9 @@ export const contactConfig: ContactConfig = {
   heading: "Let's Build Something\nExtraordinary Together",
   description: "Ready to start your project? Contact us today for a consultation. We'd love to hear about your vision and show you how Farhan Architects can bring it to life.",
   locationLabel: "Address",
-  location: "205A Wharf Street, Queens Park WA 6107, Australia",
+  location: "43A Macquarie Way Willetton 6155",
   emailLabel: "Email",
-  email: "cf@ferhandesign.com.au",
+  email: "cf@ferhanarchitects.com.au",
   phoneLabel: "Phone",
   phone: "+61 (0) 402 427 059",
   formFields: {
@@ -446,27 +453,19 @@ export const teamConfig: TeamConfig = {
   members: [
     {
       id: 1,
-      name: "Marcus Farhan",
-      role: "Principal Architect & Founder",
+      name: "Crishan Fernando",
+      role: "Director",
       image: "/images/FerhanDesign_Chrishan1.jpg",
-      bio: "With over 20 years of experience in residential and commercial architecture, Marcus leads the studio with a vision for creating spaces that fundamentally improve how people live and work. His meticulous attention to detail and passion for structural integrity define the Farhan Architects methodology.",
-      specialties: ["Master Planning", "Commercial Design", "Project Strategy"],
+      bio: "Crishan has worked on a variety of different projects, including restaurant refurbishments, residential projects, including apartments, luxury houses and recycling facilities and commercial developments. Crishan is a registered architect with the Architects Board of WA (#3278) also professional member of Association of Consulting Architects (#6117). Chrishan has experience in Project Management and in a range of different fields including food service, commercial, civil, residential and retail drafting. Chrishan's interests are heavily into hi-tech architecture, energy efficiency, low-cost housing and environmentally-friendly design.\n\nQualifications & Registrations:\n• Registered Architect #3278\n• Association of Consulting Architects - Member Practice #6117\n• Corporation Registration #3327\n• Reg Builder Contractor #102155\n• Building Practitioner #103694\n• Post.Grad.Cert (Urban Design), B.Arch(Hons), Dip.Civil.Eng\n• Diploma of Building and Construction (Master Builders Association)",
+      specialties: ["High-Tech Architecture", "Energy Efficient Design", "Low-Cost Housing", "Restaurant Refurbishments", "Project Management"],
     },
     {
       id: 2,
-      name: "Elena Rostova",
-      role: "Lead Interior Architect",
+      name: "Adrian Price",
+      role: "Consulting Architect",
       image: "/images/Ferhandesign-Adrian.jpg",
-      bio: "Elena bridges the gap between exterior architecture and interior spatial experience. Her approach focuses on tactile materials, natural light optimization, and bespoke joinery that makes every Farhan project feel distinctly custom and tailored to the client.",
-      specialties: ["Interior Architecture", "Material Specification", "Lighting Design"],
-    },
-    {
-      id: 3,
-      name: "David Chen",
-      role: "Senior Project Architect",
-      image: "/images/team-3.jpg",
-      bio: "David specializes in complex multi-residential and mixed-use developments. He excels at navigating complex council approvals and delivering high-yield, architecturally significant projects that balance developer requirements with community impact.",
-      specialties: ["Multi-Residential", "Urban Planning", "Feasibility Studies"],
+      bio: "Adrian holds a Bachelor of Design Studies and Bachelor of Architecture from the University of Adelaide and is a registered architect with the Architects Board of WA and the Architects Registration Board of Victoria. Adrian worked for retail architecture giant, The Buchan Group, major health facility firm Billard Leece Partnership where he was an Associate for several years, and the growing health practice, Vincent Chrisp Architects. Adrian's breadth of experience has seen him manage a variety of projects from high-end residential, commercial and major health facilities, including the $26million Alfred Hospital Intensive Care Unit (nominated for best institutional building in the 2009 AIA awards) and the $22million Latrobe Regional Hospital Cancer Care Centre. Known for his attention to detail, tight coordination during construction phases and his friendly but effective leadership, Adrian is always looking at new and better ways to deliver projects.",
+      specialties: ["High-End Residential", "Commercial Design", "Major Health Facilities", "Project Delivery"],
     }
   ]
 };

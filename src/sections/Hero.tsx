@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { heroConfig } from '../config';
 import Squares from '../components/Squares';
+import Waves from '../components/Waves';
+import Orb from '../components/Orb';
+import myImage from "../../public/images/Drawing.sketchpad.svg";
 
 const Hero = () => {
     if (!heroConfig.title) return null;
@@ -95,6 +98,10 @@ const Hero = () => {
             rgba(0,0,0,0.55) 65%,
             rgba(0,0,0,0.92) 100%
           );
+        }
+        #hl-drawing-image {
+          opacity: 90;
+          pointer-events: none;
         }
 
         #hl-drawing { opacity: 0.22; }
@@ -196,6 +203,16 @@ const Hero = () => {
           transform: translateY(-2px);
         }
 
+        /* ── Mobile: stack buttons full-width ── */
+        @media (max-width: 480px) {
+          .btn-arch-primary,
+          .btn-arch-secondary {
+            width: 100%;
+            text-align: center;
+            padding: 0.9rem 1.5rem;
+          }
+        }
+
         .corner-mark {
           position: absolute;
           width: 28px;
@@ -207,6 +224,14 @@ const Hero = () => {
         .corner-mark.bl { bottom: 64px; left: 32px; border-bottom: 1px solid var(--silver); border-left: 1px solid var(--silver); }
         .corner-mark.br { bottom: 64px; right: 32px; border-bottom: 1px solid var(--silver); border-right: 1px solid var(--silver); }
 
+        /* ── Mobile: tuck corners closer to edge ── */
+        @media (max-width: 480px) {
+          .corner-mark.tl { top: 16px; left: 16px; }
+          .corner-mark.tr { top: 16px; right: 16px; }
+          .corner-mark.bl { bottom: 48px; left: 16px; }
+          .corner-mark.br { bottom: 48px; right: 16px; }
+        }
+
         .coord-label {
           font-family: var(--font-body);
           font-size: 0.5rem;
@@ -214,6 +239,14 @@ const Hero = () => {
           color: rgba(255,255,255,0.18);
           text-transform: uppercase;
           position: absolute;
+        }
+
+        /* ── Mobile: hide side/top coord labels to reduce clutter ── */
+        @media (max-width: 640px) {
+          .coord-label-side,
+          .coord-label-top {
+            display: none;
+          }
         }
 
         .scroll-line {
@@ -241,12 +274,27 @@ const Hero = () => {
 
         .measure-h { position: absolute; height: 1px; background: rgba(255,255,255,0.06); }
         .measure-v { position: absolute; width: 1px; background: rgba(255,255,255,0.06); }
+
+        /* ── Mobile metadata strips ── */
+        @media (max-width: 640px) {
+          .hero-meta-right,
+          .hero-meta-left {
+            display: none;
+          }
+        }
+
+        /* ── Mobile: reduce bottom margin on title rule ── */
+        @media (max-width: 640px) {
+          .hero-rule-top  { margin-bottom: 1rem !important; }
+          .hero-rule-bot  { margin-top: 1rem !important; margin-bottom: 1rem !important; }
+          .hero-sub-wrap  { margin-bottom: 1.5rem !important; }
+        }
       `}</style>
 
             <section id="hero" ref={heroRef} className="relative h-screen w-full overflow-hidden">
 
                 {/* Layer stack */}
-                <div id="hl-base" className="absolute inset-0">
+                <div id="hl-base" className="absolute inset-0 w-full h-full">
                     <Squares
                         speed={0.5}
                         squareSize={40}
@@ -255,141 +303,133 @@ const Hero = () => {
                         hoverFillColor="#222"
                     />
                 </div>
-                {/*<div id="hl-grid-fine" className="absolute inset-0" style={{ transform: `translateY(${p1}px)` }} />*/}
-                {/*<div id="hl-grid-major" className="absolute inset-0" style={{ transform: `translateY(${p2}px)` }} />*/}
-                {/*<div id="hl-hatch" className="absolute inset-0" style={{ transform: `translateY(${p2 * 0.8}px)` }} />*/}
 
                 {/* Blueprint SVG */}
-                {/*<div id="hl-drawing" className="absolute inset-0 flex items-center justify-center" style={{ transform: `translateY(${p3}px)` }}>*/}
-                {/*    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg"*/}
-                {/*         className="w-full h-full" preserveAspectRatio="xMidYMid slice"*/}
-                {/*         stroke="white" fill="none" strokeWidth="0.5">*/}
+                <div id="hl-drawing" className="absolute inset-0 flex items-center justify-center" style={{ transform: `translateY(${p3}px)` }}>
 
-                {/*        /!* Floor plan — left wing *!/*/}
-                {/*        <rect x="80" y="80" width="340" height="540" />*/}
-                {/*        <rect x="84" y="84" width="332" height="532" strokeWidth="0.25" strokeDasharray="4 4" />*/}
-                {/*        <rect x="80" y="80" width="160" height="180" />*/}
-                {/*        <rect x="80" y="260" width="160" height="200" />*/}
-                {/*        <rect x="80" y="460" width="160" height="160" />*/}
-                {/*        <rect x="240" y="80" width="180" height="540" />*/}
+                    <div
+                        id="hl-drawing-image"
+                        className="absolute inset-1 flex items-center justify-center"
+                        style={{ transform: `translateY(${p3}px)` }}
+                    >
+                        <img
+                            src={myImage}
+                            alt="Architectural drawing"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain',
+                                display: 'block',
+                            }}
+                        />
+                    </div>
 
-                {/*        /!* Staircase *!/*/}
-                {/*        {Array.from({ length: 10 }).map((_, i) => (*/}
-                {/*            <line key={i} x1="252" y1={210 + i * 12} x2="310" y2={210 + i * 12} strokeWidth="0.4" />*/}
-                {/*        ))}*/}
+                    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg"
+                         className="w-full h-full" preserveAspectRatio="xMidYMid slice"
+                         stroke="white" fill="none" strokeWidth="0.5">
 
-                {/*        /!* Doors *!/*/}
-                {/*        <path d="M 240 200 Q 210 200 210 230" strokeWidth="0.6" />*/}
-                {/*        <line x1="210" y1="200" x2="240" y2="200" />*/}
-                {/*        <path d="M 240 380 Q 210 380 210 350" strokeWidth="0.6" />*/}
-                {/*        <line x1="210" y1="380" x2="240" y2="380" />*/}
+                        <g strokeOpacity="0.1" strokeWidth="0.4">
+                            {Array.from({ length: 13 }).map((_, i) => (
+                                <line key={`vg-${i}`} x1={100 + i * 100} y1="50" x2={100 + i * 100} y2="650" />
+                            ))}
+                            {Array.from({ length: 7 }).map((_, i) => (
+                                <line key={`hg-${i}`} x1="50" y1={100 + i * 100} x2="1150" y2={100 + i * 100} />
+                            ))}
+                        </g>
 
-                {/*        /!* Windows *!/*/}
-                {/*        <line x1="80" y1="130" x2="80" y2="180" strokeWidth="1.5" />*/}
-                {/*        <line x1="80" y1="300" x2="80" y2="360" strokeWidth="1.5" />*/}
-                {/*        <line x1="80" y1="490" x2="80" y2="540" strokeWidth="1.5" />*/}
+                        <rect x="150" y="150" width="900" height="400" strokeOpacity="0.3" strokeDasharray="8 8" />
 
-                {/*        /!* Elevation facade — right wing *!/*/}
-                {/*        <rect x="560" y="120" width="580" height="460" />*/}
-                {/*        {Array.from({ length: 8 }).map((_, col) =>*/}
-                {/*            Array.from({ length: 5 }).map((_, row) => (*/}
-                {/*                <rect key={`w-${col}-${row}`} x={585 + col * 68} y={155 + row * 82} width="38" height="52" strokeWidth="0.4" />*/}
-                {/*            ))*/}
-                {/*        )}*/}
-                {/*        {Array.from({ length: 9 }).map((_, i) => (*/}
-                {/*            <line key={`fc-${i}`} x1={560 + i * 72.5} y1="120" x2={560 + i * 72.5} y2="580" strokeWidth="0.25" strokeDasharray="2 6" />*/}
-                {/*        ))}*/}
-                {/*        {Array.from({ length: 6 }).map((_, i) => (*/}
-                {/*            <line key={`ff-${i}`} x1="560" y1={120 + i * 92} x2="1140" y2={120 + i * 92} strokeWidth="0.25" strokeDasharray="2 6" />*/}
-                {/*        ))}*/}
-                {/*        <path d="M 820 580 L 820 500 Q 820 460 860 460 Q 900 460 900 500 L 900 580" strokeWidth="0.7" />*/}
+                        <g strokeOpacity="0.4">
+                            <line x1="140" y1="200" x2="140" y2="500" />
+                            <line x1="135" y1="200" x2="145" y2="200" />
+                            <line x1="135" y1="500" x2="145" y2="500" />
+                            <text x="110" y="350" fill="white" fontSize="18" stroke="none" fillOpacity="0.3">30'</text>
+                            <line x1="300" y1="540" x2="700" y2="540" />
+                            <line x1="300" y1="535" x2="300" y2="545" />
+                            <line x1="700" y1="535" x2="700" y2="545" />
+                            <text x="480" y="570" fill="white" fontSize="18" stroke="none" fillOpacity="0.3">40'</text>
+                        </g>
 
-                {/*        /!* Dimension lines *!/*/}
-                {/*        <line x1="80" y1="50" x2="420" y2="50" strokeWidth="0.4" />*/}
-                {/*        <line x1="80" y1="44" x2="80" y2="56" strokeWidth="0.4" />*/}
-                {/*        <line x1="420" y1="44" x2="420" y2="56" strokeWidth="0.4" />*/}
-                {/*        <line x1="50" y1="80" x2="50" y2="620" strokeWidth="0.4" />*/}
-                {/*        <line x1="44" y1="80" x2="56" y2="80" strokeWidth="0.4" />*/}
-                {/*        <line x1="44" y1="620" x2="56" y2="620" strokeWidth="0.4" />*/}
+                        <g transform="translate(1000, 100)" strokeOpacity="0.6">
+                            <circle cx="0" cy="0" r="18" />
+                            <polygon points="0,-12 4,0 -4,0" fill="white" fillOpacity="0.6" stroke="none" />
+                            <line x1="0" y1="-12" x2="0" y2="12" />
+                            <text x="8" y="-8" fill="white" fontSize="14" stroke="none" fillOpacity="0.5">N</text>
+                        </g>
 
-                {/*        /!* North indicator *!/*/}
-                {/*        <circle cx="490" cy="630" r="18" strokeWidth="0.6" />*/}
-                {/*        <polygon points="490,612 484,636 490,630 496,636" fill="white" fillOpacity="0.6" strokeWidth="0" />*/}
-                {/*        <line x1="490" y1="612" x2="490" y2="648" strokeWidth="0.5" />*/}
-
-                {/*        /!* Scale bar *!/*/}
-                {/*        <line x1="560" y1="635" x2="760" y2="635" strokeWidth="0.6" />*/}
-                {/*        {[0, 1, 2, 3, 4].map(i => (*/}
-                {/*            <line key={`sb-${i}`} x1={560 + i * 50} y1="630" x2={560 + i * 50} y2="640" strokeWidth="0.5" />*/}
-                {/*        ))}*/}
-                {/*    </svg>*/}
-                {/*</div>*/}
+                        <text x="200" y="80" fill="white" fontSize="24" stroke="none" fillOpacity="0.4" fontFamily="monospace">FIRST FLOOR PLAN</text>
+                        <text x="920" y="620" fill="white" fontSize="18" stroke="none" fillOpacity="0.3" fontFamily="monospace">SCALE 1:200</text>
+                        <text x="150" y="620" fill="white" fontSize="14" stroke="none" fillOpacity="0.2">A-101</text>
+                        <text x="1050" y="180" fill="white" fontSize="14" stroke="none" fillOpacity="0.2">REV. 01</text>
+                    </svg>
+                </div>
 
                 <div id="hl-elevation" className="absolute inset-0" style={{ transform: `translateY(${p3 * 0.6}px)` }} />
                 <div id="hl-spot" className="absolute inset-0" style={{ transform: `translateY(${p4}px)` }} />
                 <div id="hl-grain" className="absolute inset-0 pointer-events-none" />
                 <div id="hl-vignette" className="absolute inset-0" />
 
-                {/* Crosshair lines */}
                 <div className="measure-h" style={{ top: '50%', left: 0, right: 0 }} />
                 <div className="measure-v" style={{ left: '50%', top: 0, bottom: 0 }} />
 
-                {/* Corner marks */}
                 <div className="corner-mark tl" />
                 <div className="corner-mark tr" />
                 <div className="corner-mark bl" />
                 <div className="corner-mark br" />
 
-                {/* Coordinate labels */}
                 <span className="coord-label" style={{ top: 36, left: 68 }}>A-01</span>
                 <span className="coord-label" style={{ top: 36, right: 68 }}>A-02</span>
                 <span className="coord-label" style={{ bottom: 72, left: 68 }}>B-01</span>
                 <span className="coord-label" style={{ bottom: 72, right: 68 }}>B-02</span>
-                <span className="coord-label" style={{ top: '50%', left: 20, transform: 'rotate(-90deg) translateX(-50%)' }}>SECTION A–A</span>
-                <span className="coord-label" style={{ top: 20, left: '50%', transform: 'translateX(-50%)' }}>ELEVATION — NORTH FACADE</span>
+                <span className="coord-label coord-label-side" style={{ top: '50%', left: 20, transform: 'rotate(-90deg) translateX(-50%)' }}>SECTION A–A</span>
+                <span className="coord-label coord-label-top" style={{ top: 20, left: '50%', transform: 'translateX(-50%)' }}>ELEVATION — NORTH FACADE</span>
 
                 {/* Content */}
                 <div
                     className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
                     style={{ transform: `translateY(${contentShift}px)` }}
                 >
-                    <div className={`fu ${isVisible ? 'on' : 'off'} mb-5`} style={{ transitionDelay: '150ms' }}>
+                    <div className={`fu ${isVisible ? 'on' : 'off'} mb-5 font-bold`} style={{ transitionDelay: '150ms' }}>
                         <span className="hero-number">SHEET 01 / 01 &nbsp;·&nbsp; SCALE 1:100 &nbsp;·&nbsp; REV.A</span>
                     </div>
 
-                    <div className={`fu ${isVisible ? 'on' : 'off'} mb-6`} style={{ transitionDelay: '300ms' }}>
+                    <div className={`fu ${isVisible ? 'on' : 'off'} mb-6 font-bold`} style={{ transitionDelay: '300ms' }}>
                         <span className="hero-eyebrow">{heroConfig.tagline}</span>
                     </div>
 
-                    <div className={`fu ${isVisible ? 'on' : 'off'} w-48 mb-8`} style={{ transitionDelay: '440ms' }}>
+                    <div className={`fu ${isVisible ? 'on' : 'off'} w-48 mb-8 hero-rule-top`} style={{ transitionDelay: '440ms' }}>
                         <div className="hero-rule" />
                     </div>
 
                     <h1
-                        className={`fu ${isVisible ? 'on' : 'off'} hero-title max-w-4xl`}
-                        style={{ transitionDelay: '560ms', fontSize: 'clamp(4rem, 11vw, 9rem)' }}
+                        className={`fu ${isVisible ? 'on' : 'off'} hero-title max-w-4xl font-black`}
+                        style={{
+                            transitionDelay: '560ms',
+                            // Wider range: min 2.2rem (mobile) → max 9rem (desktop)
+                            fontSize: 'clamp(2.2rem, 10vw, 9rem)',
+                        }}
                     >
                         {titleLines.map((line, i) =>
-                                i === titleLines.length - 1 ? (
-                                    <em key={i}>{line}</em>
-                                ) : (
-                                    <span key={i}>
-                  {line}
-                                        {i < titleLines.length - 1 && <br />}
-                </span>
-                                )
+                            i === titleLines.length - 1 ? (
+                                <em key={i}>{line}</em>
+                            ) : (
+                                <span key={i}>
+                                        {line}
+                                    {i < titleLines.length - 1 && <br />}
+                                    </span>
+                            )
                         )}
                     </h1>
 
-                    <div className={`fu ${isVisible ? 'on' : 'off'} w-48 mt-8 mb-7`} style={{ transitionDelay: '700ms' }}>
+                    <div className={`fu ${isVisible ? 'on' : 'off'} w-48 mt-8 mb-7 hero-rule-bot`} style={{ transitionDelay: '700ms' }}>
                         <div className="hero-rule" />
                     </div>
 
-                    <div className={`fu ${isVisible ? 'on' : 'off'} mb-12`} style={{ transitionDelay: '800ms' }}>
+                    <div className={`fu ${isVisible ? 'on' : 'off'} mb-12 hero-sub-wrap`} style={{ transitionDelay: '800ms' }}>
                         <span className="hero-sub">Precision &nbsp;·&nbsp; Form &nbsp;·&nbsp; Structure</span>
                     </div>
 
-                    <div className={`fu ${isVisible ? 'on' : 'off'} flex flex-col sm:flex-row gap-4`} style={{ transitionDelay: '960ms' }}>
+                    <div className={`fu ${isVisible ? 'on' : 'off'} flex flex-col sm:flex-row gap-4 w-full sm:w-auto max-w-xs sm:max-w-none`} style={{ transitionDelay: '960ms' }}>
                         {heroConfig.ctaPrimaryText && (
                             <a
                                 href={heroConfig.ctaPrimaryTarget}
@@ -424,12 +464,12 @@ const Hero = () => {
                     </button>
                 </div>
 
-                {/* Drawing metadata strips */}
-                <div className={`absolute bottom-8 right-8 transition-opacity duration-1000 text-right ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '1100ms' }}>
+                {/* Drawing metadata strips — hidden on mobile */}
+                <div className={`hero-meta-right absolute bottom-8 right-8 transition-opacity duration-1000 text-right ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '1100ms' }}>
                     <div className="hero-number" style={{ marginBottom: '2px' }}>DRAWN BY: STUDIO</div>
                     <div className="hero-number">DATE: {new Date().getFullYear()} &nbsp;·&nbsp; DWG NO. 001</div>
                 </div>
-                <div className={`absolute bottom-8 left-8 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '1100ms' }}>
+                <div className={`hero-meta-left absolute bottom-8 left-8 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '1100ms' }}>
                     <div className="hero-number">PROJECT: {(heroConfig.tagline || 'ARCHITECTURE').toUpperCase()}</div>
                 </div>
             </section>
