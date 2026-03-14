@@ -276,11 +276,9 @@ const MemberModal = ({
 const TeamCard = ({
     member,
     onClick,
-    index,
 }: {
     member: TeamMember;
     onClick: () => void;
-    index: number;
 }) => {
     const [hovered, setHovered] = useState(false);
     const [loaded, setLoaded] = useState(false);
@@ -388,11 +386,10 @@ const Team = () => {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                    {teamConfig.members.map((member, i) => (
+                    {teamConfig.members.map((member) => (
                         <TeamCard
                             key={member.id}
                             member={member}
-                            index={i}
                             onClick={() => setSelectedMember(member)}
                         />
                     ))}

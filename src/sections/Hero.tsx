@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { heroConfig } from '../config';
 import Squares from '../components/Squares';
-import Waves from '../components/Waves';
-import Orb from '../components/Orb';
 import myImage from "../../public/images/Drawing.sketchpad.svg";
 
 const Hero = () => {

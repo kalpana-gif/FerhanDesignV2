@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
 import { navigationConfig } from '../config';
-import GradualBlur from '@/components/GradualBlur';
 
 interface NavigationProps { }
 
@@ -164,7 +163,6 @@ const MobileLink = ({
 // ─── Main Component ───────────────────────────────────────────────────────────
 const Navigation = ({ }: NavigationProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState<string>('');
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
     const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
@@ -219,7 +217,7 @@ const Navigation = ({ }: NavigationProps) => {
 
     // ── Scroll ────────────────────────────────────────────────────────────
     useEffect(() => {
-        const onScroll = () => { setIsScrolled(window.scrollY > 60); checkBackground(); };
+        const onScroll = () => {  checkBackground(); };
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, [checkBackground]);
