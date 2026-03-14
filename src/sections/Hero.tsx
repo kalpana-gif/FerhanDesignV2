@@ -29,8 +29,6 @@ const Hero = () => {
 
     const titleLines = heroConfig.title.split('\n');
 
-    const p1 = scrollY * 0.10;
-    const p2 = scrollY * 0.22;
     const p3 = scrollY * 0.38;
     const p4 = scrollY * 0.55;
     const contentShift = scrollY * 0.35;
